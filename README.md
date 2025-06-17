@@ -1,126 +1,105 @@
-# Stock Market Forecasting System for Zudio Internship
+# Stock Market Analysis Dashboard
 
-This project develops a comprehensive stock market time series forecasting system, fulfilling the requirements for my Zudio internship. It covers data collection, preprocessing, model implementation (ARIMA, SARIMA, Prophet, LSTM), evaluation, visualization, and optional web deployment.
+## Project Overview
 
-## 📊 Project Objectives
+This project delivers a comprehensive Stock Market Analysis Dashboard, developed rapidly within a one-month timeframe. It leverages Python and popular data science libraries to provide in-depth analysis of stock data, including historical trends, technical indicators, and interactive visualizations. The dashboard is designed to be user-friendly, offering insights into market performance and aiding in data-driven decision-decision-making.
 
-- Collect and preprocess historical stock market data.
-- Implement various time series models: ARIMA, SARIMA, Prophet, and LSTM.
-- Evaluate and compare the accuracy of different forecasting models.
-- Visualize key insights, trends, seasonality, and model predictions.
-- (Optional) Deploy a user-friendly web interface for interactive forecasting.
+## Key Features
 
-## 🛠️ Tech Stack & Tools
+*   **Automated Data Collection**: Downloads historical stock data using `yfinance`.
+*   **Robust Data Preprocessing**: Handles missing values, adds essential technical indicators (e.g., Moving Averages, RSI, MACD, Bollinger Bands), and extracts time-based features.
+*   **Interactive Visualizations**: Generates a variety of plots (price history, moving averages, technical indicators, returns distribution, volatility, correlation heatmaps) using Plotly and Matplotlib.
+*   **Streamlit Web Dashboard**: A user-friendly web interface built with Streamlit for interactive exploration of stock data and analysis.
+*   **Portfolio Analysis**: (As seen in `app.py`) Calculates portfolio metrics and visualizes efficient frontiers.
+*   **News Sentiment Analysis**: (As seen in `app.py`) Integrates news sentiment for selected stocks.
+*   **Export Capabilities**: Allows users to download processed data.
 
-- **Language**: Python
-- **Data Handling**: `pandas`, `numpy`
-- **Visualization**: `matplotlib`, `seaborn`, `plotly`
-- **Data Acquisition**: `yfinance`
-- **Statistical Models**: `statsmodels`, `pmdarima` (for ARIMA/SARIMA)
-- **Prophet Model**: `prophet` (Facebook Prophet)
-- **Deep Learning Model**: `tensorflow`, `keras` (for LSTM)
-- **Model Evaluation**: `scikit-learn`
-- **Web Deployment (Optional)**: `streamlit` or `flask`
-- **Development Environment**: Visual Studio Code
-
-## 📁 Project Folder Structure
+## Project Structure
 
 ```
-stock_forecasting_project/
-├── data/                  # Stores raw and cleaned historical stock data (CSV)
-├── notebooks/            # Jupyter notebooks for exploratory data analysis (EDA) and experimentation
-├── models/                # Saved trained models (e.g., .pkl, .h5 files)
-├── visuals/               # Generated plots and charts (PNG, HTML)
-├── reports/               # Model comparison tables, evaluation reports (Markdown, Excel)
-├── app/                   # Source code for the optional Streamlit/Flask web application
-├── main.py                # Main script to run the entire forecasting pipeline
-├── requirements.txt       # Lists all Python dependencies and their versions
-└── README.md              # Project documentation, setup, and usage instructions
+.
+├── data/
+│   ├── AAPL_cleaned_data.csv
+│   ├── AAPL_historical_data.csv
+│   └── AAPL_processed_data.csv
+├── src/
+│   ├── app.py                     # Streamlit web application
+│   ├── main.py                    # Main script for data pipeline (download, preprocess, visualize)
+│   ├── data_preprocessor.py       # Handles data cleaning and feature engineering
+│   ├── visualization/
+│   │   └── visualizer.py          # Functions for generating plots
+│   └── ... (other modules for models, evaluation, etc.)
+├── requirements.txt               # Project dependencies
+├── visuals/                       # Directory for saved plots
+└── README.md                      # This file
 ```
 
-## 🚀 Setup and Installation
+## Setup and Installation
 
-**IMPORTANT:** For `tensorflow` and `pmdarima` to install correctly on Windows, you **MUST** have the **"Desktop development with C++" workload** installed via the Visual Studio Build Tools. Download from [https://visualstudio.microsoft.com/visual-cpp-build-tools/](https://visualstudio.microsoft.com/visual-cpp-build-tools/) and select this workload during installation.
+To get this project up and running locally, follow these steps:
 
-1.  **Clone the repository** (if applicable, or create the `stock_forecasting_project` directory).
-
-2.  **Install Python 3.10 (Recommended for TensorFlow/pmdarima compatibility):**
-    If you don't have Python 3.10 installed, download it from [https://www.python.org/downloads/release/python-31012/](https://www.python.org/downloads/release/python-31012/). During installation, ensure you check "Add Python 3.10 to PATH".
-
-3.  **Create and Activate a Virtual Environment:**
-    Open your terminal (Command Prompt or PowerShell) **as an Administrator**.
-    Navigate to your project root directory: `cd D:\Internship project`
-
-    Then, create the virtual environment using Python 3.10 (adjust path as per your installation):
+1.  **Clone the Repository (if you haven't already):**
     ```bash
-    "C:\Users\YOUR_WINDOWS_USERNAME\AppData\Local\Programs\Python\Python310\python.exe" -m venv venv_py310
+    git clone https://github.com/VishalDeep1377/Stock_Prediction.git
+    cd Stock_Prediction
     ```
-    (Replace `YOUR_WINDOWS_USERNAME` with your actual Windows username. Common path alternatives: `C:\Python310\python.exe` or `C:\Program Files\Python310\python.exe`)
 
-    Activate the virtual environment:
-    ```bash
-    .\venv_py310\Scripts\activate
-    ```
-    (You should see `(venv_py310)` at the start of your terminal prompt).
+2.  **Create and Activate a Virtual Environment:**
+    It's highly recommended to use a virtual environment to manage dependencies.
 
-4.  **Install Dependencies:**
-    With the virtual environment active, install all required packages:
+    *   **On Windows:**
+        ```bash
+        python -m venv venv
+        .\venv\Scripts\activate
+        ```
+    *   **On macOS/Linux:**
+        ```bash
+        python3 -m venv venv
+        source venv/bin/activate
+        ```
+
+3.  **Install Dependencies:**
+    Install all required Python packages using `pip`:
     ```bash
     pip install -r requirements.txt
     ```
 
-## 🏃 How to Run the Project
+## How to Run the Application
 
-After setting up the environment and installing dependencies, run the main script from your project root directory:
+There are two main ways to run this project:
+
+### 1. Run the Data Pipeline (main.py)
+
+This script will download data, preprocess it, and generate static visualization files in the `visuals/` directory.
 
 ```bash
-python main.py
+python -m src.main
 ```
+This will output various CSV files in the `data/` directory and PNG plots in the `visuals/` directory.
 
-This script orchestrates the entire pipeline: data collection, preprocessing, model training, evaluation, and visualization. Output files (data, models, visuals, reports) will be saved in their respective directories.
+### 2. Run the Streamlit Web Dashboard (app.py)
 
-## 🎯 Project Stages and Deliverables
+This launches the interactive dashboard in your web browser. Ensure your virtual environment is activated.
 
-### 🗓️ Week 1-2: Data Collection & Time Series Concepts
-- `src/data_collector.py`: Python script to fetch historical stock data (e.g., AAPL) using `yfinance`.
-- `data/AAPL_historical_data.csv`: Saved raw historical data.
+```bash
+streamlit run src/app.py
+```
+After running this command, your web browser should automatically open to the Streamlit application (usually `http://localhost:8501`).
 
-### 🧹 Week 3-4: Data Cleaning & Visualization
-- `src/data_preprocessor.py`: Python script for data cleaning (handling nulls, focusing on 'Close' price).
-- `src/visualization.py`: Module for visualizing stock trends, moving averages, and seasonality.
-- `visuals/price_trend.png`: Plot of historical stock prices.
-- `visuals/moving_average.png`: Plot with moving averages.
-- `notebooks/eda.ipynb`: Jupyter notebook for exploratory data analysis, including ACF/PACF plots.
+## Distributing as a Standalone Executable (Windows)
 
-### 📊 Week 5-6: ARIMA, SARIMA, Prophet Implementation
-- `src/models/arima_model.py`: Implementation of ARIMA model with auto-selection or custom order.
-- `src/models/sarima_model.py`: Implementation of SARIMA model for seasonal data.
-- `src/models/prophet_model.py`: Implementation of Facebook Prophet model.
-- `visuals/arima_forecast.png`, `visuals/sarima_forecast.png`, `visuals/prophet_forecast.png`: Plots showing 30-day forecasts vs. actual data.
-- `models/arima_model.pkl`, `models/sarima_model.pkl`, `models/prophet_model.pkl`: Saved trained models.
+For users who do not have Python installed, a Windows executable (`.exe`) can be generated. This `app.exe` (found in the `dist/` folder after running PyInstaller) bundles the entire application and its dependencies.
 
-### 🤖 Week 7-8: Deep Learning using LSTM
-- `src/data_preprocessor.py`: Extended to include data scaling (`MinMaxScaler`) and creation of time windows for LSTM.
-- `src/models/lstm_model.py`: Implementation of LSTM model using `tensorflow.keras`.
-- `visuals/lstm_forecast.png`: Plot showing LSTM 30-day forecasts vs. actual data.
-- `models/lstm_model.h5`: Saved trained LSTM model.
+**Note for Users:** When running the `.exe` file, Windows SmartScreen or antivirus software might display a "not safe" warning because the application is not digitally signed. Users should click "More info" and then "Run anyway" to proceed, as this is a trusted application from this project.
 
-### 🔍 Week 9: Model Comparison
-- `src/model_evaluator.py`: Module to calculate RMSE, MAE, MAPE for all models.
-- `reports/model_comparison.md` (or `.xlsx`): Table comparing model accuracy and runtime.
-- `visuals/model_comparison_chart.png`: Bar chart or similar visualizing model performance metrics.
+## Development Timeline
 
-### 🧑‍💻 Week 10-12: Final Output & Optional Deployment
-- `README.md`: This comprehensive documentation.
-- `app/streamlit_dashboard.py` (Optional): Streamlit application allowing user selection of stock, model, and date range for interactive forecasting.
-- GitHub repository with the entire codebase.
+This project was developed under an intensive one-month timeline, focusing on delivering core functionalities and a robust analysis pipeline efficiently. This concentrated effort allowed for rapid prototyping and deployment of the key features highlighted above.
 
-## 📝 Code Standards
+## Contributing
 
-All Python scripts will adhere to:
-- **Modularity**: Functions and classes for distinct tasks.
-- **Readability**: Clear variable names, consistent formatting.
-- **Comments**: Inline comments explaining complex logic, docstrings for functions/classes.
-- **Error Handling**: Basic error handling for robust operation.
+For any questions, issues, or potential contributions, please refer to the project's GitHub repository.
 
---- 
+## License
+
+This project is open-source and available under the MIT License. See the `LICENSE` file (if applicable) for more details.
